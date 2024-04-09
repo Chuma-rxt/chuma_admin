@@ -3,7 +3,7 @@ import { Inter } from "next/font/google";
 import "../globals.css";
 import { ClerkProvider } from '@clerk/nextjs';
 
-import LestSideBar from "@/components/layout/LestSideBar";
+import LeftSideBar from "@/components/layout/LestSideBar";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -21,8 +21,11 @@ export default function RootLayout({
     <ClerkProvider>
       <html lang="en">
         <body className={inter.className}>
-          <LeftSideBar />
-          {children}</body>
+          <div className="flex max-lg:flex-col">
+            <LeftSideBar />
+            <div className="flex-1">{children}</div>
+          </div>
+        </body>
       </html>
     </ClerkProvider>
   );

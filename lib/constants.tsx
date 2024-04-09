@@ -4,7 +4,7 @@ import {
     ShoppingBag,
     Tag,
     UsersRound,
-} fron "lucide-react";
+} from "lucide-react";
 
 export const navLinks = [
     {
