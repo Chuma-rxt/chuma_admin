@@ -17,6 +17,7 @@ import {
 } from "@/components/ui/form"
 import { Input } from "@/components/ui/input"
 import { Textarea } from "../ui/textarea"
+import ImageUpload from "../custom ui/ImageUpload"
 
 const formSchema = z.object({
   title: z.string().min(2).max(20),
@@ -82,6 +83,7 @@ const CollectionForm = () => {
                 <FormControl>
                   <Textarea placeholder="Image" {...field} rows={5} />
                 </FormControl>
+                <ImageUpload />
                 <FormMessage />
               </FormItem>
             )}
