@@ -1,6 +1,7 @@
 import { CldUploadWidget } from 'next-cloudinary';
 import { Plus } from 'lucide-react';
 
+import { Image } from 'lucide-react';
 import { Button } from '../ui/button';
 
 interface ImageUploadProps {
@@ -14,23 +15,39 @@ const ImageUpload: React.FC<ImageUploadProps> = ({
     onRemove,
     value,
 }) => {
-
     const onUpload = (result: any) => {
         onChange(result.info.secure_url);
-    }
+    };
 
     return (
-    <CldUploadWidget uploadPreset="iqa5ywcb">
-        {({ open }) => {
-            return (
-                < Button onClick={() => open()} className="bg-grey-1 text-white">
-                    <Plus className="h-4 w-4 mr-2" />
-                    Upload Image
-                </Button>
-            );
-        }}
-    </CldUploadWidget >
+        <div>
+            <div className="mb-4 flex flex-wrap items-center gap-4">
+                {value.map((url) => (
+                    <div className="relative w-[200px] h-[200px]">
+                        <div className="absolute top-0 right-0 z-10">
+                            <Button onClick={() => onRemove}></Button>
+                        </div>
+                        <Image
+                            src={url}
+                            alt="collection"
+                            className="object-cover rounded-lg"
+                            fill
+                        />
+                    </div>
+                ))}
+            </div>
+            <CldUploadWidget uploadPreset="iqa5ywcb" onUploadAdded={onUpload}>
+                {({ open }) => {
+                    return (
+                        < Button onClick={() => open()} className="bg-grey-1 text-white">
+                            <Plus className="h-4 w-4 mr-2" />
+                            Upload Image
+                        </Button>
+                    );
+                }}
+            </CldUploadWidget >
+        </div>
     );
 };
 
-    export default ImageUpload
+export default ImageUpload
