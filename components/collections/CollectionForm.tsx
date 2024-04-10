@@ -35,7 +35,7 @@ const CollectionForm = () => {
     },
   })
 
-  function onSubmit = async (values: z.infer<typeof formSchema>) => {
+  const onSubmit = async (values: z.infer<typeof formSchema>) => {
     console.log(values)
   }
 
