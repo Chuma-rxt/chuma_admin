@@ -1,8 +1,8 @@
-import CollectionForm from "@/components/collection/CollectionForm"
+import CollectionForm from "@/components/collections/CollectionForm"
 
 const CreateCollection = () => {
   return (
-    <div> CreateCollection</div>
+    <CollectionForm />
   )
 }
 
