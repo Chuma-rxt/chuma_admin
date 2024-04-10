@@ -1,8 +1,9 @@
 "use client"
 
-import { zodResolver } from "@hookform/resolvers/zod"
-import { useForm } from "react-hook-form"
-import { z } from "zod"
+import { zodResolver } from "@hookform/resolvers/zod";
+import { useForm } from "react-hook-form";
+import { z } from "zod";
+import { useRouter } from "next/navigation";
 
 import { Separator } from "../ui/separator"
 import { Button } from "@/components/ui/button"
@@ -19,6 +20,7 @@ import { Input } from "@/components/ui/input"
 import { Textarea } from "../ui/textarea"
 import ImageUpload from "../custom ui/ImageUpload"
 
+
 const formSchema = z.object({
   title: z.string().min(2).max(20),
   description: z.string().min(2).max(500).trim(),
@@ -27,6 +29,7 @@ const formSchema = z.object({
 
 
 const CollectionForm = () => {
+  const router = useRouter();
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -92,9 +95,11 @@ const CollectionForm = () => {
             )}
           />
 
+          <div className="flex gap-10">
+            <Button type="submit" className="bg-blue-1 text-white">Submit</Button>
+            <Button type="button" onClick={() => router.push("/collections") } className="bg-blue-1 text-white">Discard</Button>
+          </div>
 
-
-          <Button type="submit">Submit</Button>
         </form>
       </Form>
     </div>
