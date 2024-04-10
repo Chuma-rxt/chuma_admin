@@ -81,9 +81,12 @@ const CollectionForm = () => {
               <FormItem>
                 <FormLabel>Image</FormLabel>
                 <FormControl>
-                  <Textarea placeholder="Image" {...field} rows={5} />
+                  <ImageUpload
+                    value={field.value ? [field.value] : []}
+                    onChange={(url) => field.onChange(url)}
+                    onRemove={() => field.onChange("")}
+                  />
                 </FormControl>
-                <ImageUpload />
                 <FormMessage />
               </FormItem>
             )}
