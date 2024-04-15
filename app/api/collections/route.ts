@@ -1,7 +1,10 @@
 import { connectToDB } from "@/lib/mongoDB";
 import { auth } from "@clerk/nextjs";
-import { Collection } from "mongoose";
 import { NextRequest, NextResponse } from "next/server";
+
+import Collection from "@/lib/models/Collection";
+
+
 
 export const POST = async (req: NextRequest) => {
     try {
@@ -25,11 +28,15 @@ export const POST = async (req: NextRequest) => {
             return new NextResponse("Title and image are required", { status:400 })
          }
 
-         const newCollection = await Collection.createIndex({
+         const newCollection = await Collection.create({
             title,
             description,
             image,
          })
+
+         await newCollection.save()
+
+         return NextResponse.json(newCollection, { status: 200})
 
 
     } catch (err) {
