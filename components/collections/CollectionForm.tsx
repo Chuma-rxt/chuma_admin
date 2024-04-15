@@ -49,7 +49,7 @@ const CollectionForm = () => {
       setLoading(true);
       const res = await fetch("/api/collections", {
         method: "POST",
-        body: JSON.stringify(value),
+        body: JSON.stringify(values),
       });
     } catch (err) {
       console.log("[collections_POST]", err);
