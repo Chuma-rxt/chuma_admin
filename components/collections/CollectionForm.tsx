@@ -44,24 +44,50 @@ const CollectionForm = () => {
     },
   })
 
+  // const onSubmit = async (values: z.infer<typeof formSchema>) => {
+  //   try {
+  //     setLoading(true);
+  //     const res = await fetch("/api/collections", {
+  //       method: "POST",
+  //       body: JSON.stringify(values),
+  //     });
+
+  //     if (res.ok) {
+  //       setLoading(false);
+  //       toast.success("Collection created");
+  //       router.push("/collections");
+  //     }
+  //   } catch (err) {
+  //     console.log("[collections_POST]", err);
+  //     toast.error("Something went wrong! Please try again.");
+  //   }
+  // };
+
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
     try {
       setLoading(true);
       const res = await fetch("/api/collections", {
         method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
         body: JSON.stringify(values),
       });
-
+  
       if (res.ok) {
         setLoading(false);
         toast.success("Collection created");
         router.push("/collections");
+      } else {
+        const errorMessage = await res.text();
+        throw new Error(errorMessage || "Failed to create collection");
       }
     } catch (err) {
-      console.log("[collections_POST]", err);
+      console.error("[collections_POST]", err);
       toast.error("Something went wrong! Please try again.");
     }
   };
+  
 
   return (
     <div className="p-10">
