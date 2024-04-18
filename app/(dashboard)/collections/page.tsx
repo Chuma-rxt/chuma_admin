@@ -4,4 +4,4 @@ const Collections = () => {
   )
 }
 
-export default page
+export default Collections
